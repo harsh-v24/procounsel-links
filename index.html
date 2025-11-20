@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProCounsel</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    /* -----------------------------
+       GLOBAL PAGE & BACKGROUND
+    ------------------------------ */
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: #ffffff;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        background:
+            radial-gradient(circle at top, rgba(255, 122, 0, 0.35) 0%, transparent 45%),
+            radial-gradient(circle at bottom, #1a2536 0%, #05070d 55%, #010208 100%);
+        background-attachment: fixed;
+        overflow-x: hidden;
+    }
+
+    .page-wrapper {
+        width: 100%;
+        max-width: 520px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        align-items: stretch;
+        animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+        0% { opacity: 0; transform: translateY(12px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* -----------------------------
+       GLASS CARDS
+    ------------------------------ */
+
+    .glass-card {
+        background: rgba(255, 255, 255, 0.07);
+        border-radius: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        padding: 26px 22px 24px;
+        text-align: center;
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease,
+            background 0.3s ease,
+            border-color 0.3s ease;
+    }
+
+    .glass-card.main-card {
+        padding-top: 30px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* orange glow behind logo */
+    .glass-card.main-card::before {
+        content: "";
+        position: absolute;
+        width: 260px;
+        height: 260px;
+        background: radial-gradient(circle, rgba(255, 122, 0, 0.65) 0%, transparent 65%);
+        top: -80px;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0.6;
+        pointer-events: none;
+    }
+
+    .glass-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 26px 60px rgba(0, 0, 0, 0.7);
+        border-color: rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.09);
+    }
+
+    /* -----------------------------
+       LOGO & TITLE
+    ------------------------------ */
+
+    .logo {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin: 0 auto 14px;
+        display: block;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        position: relative;
+        z-index: 1;
+    }
+
+    .logo:hover {
+        transform: scale(1.05) translateY(-3px);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
+    }
+
+    h1 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -0.4px;
+        color: #ffffff;
+        position: relative;
+        z-index: 1;
+    }
+
+    .subtitle {
+        margin-top: 6px;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.7);
+        position: relative;
+        z-index: 1;
+    }
+
+    /* -----------------------------
+       WEBSITE BUTTON
+    ------------------------------ */
+
+    .button {
+        width: 80%;
+        max-width: 340px;
+        margin: 22px auto 6px;
+        background: rgba(255, 255, 255, 0.12);
+        padding: 14px 18px;
+        border-radius: 999px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        font-size: 18px;
+        font-weight: 600;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        text-decoration: none;
+        color: #ffffff;
+        transition:
+            background 0.3s ease,
+            transform 0.25s ease,
+            box-shadow 0.3s ease,
+            border-color 0.3s ease;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    .button::before {
+        content: "";
+        position: absolute;
+        width: 40%;
+        height: 220%;
+        background: linear-gradient(120deg, rgba(255, 255, 255, 0.35), transparent);
+        transform: translateX(-130%) rotate(20deg);
+        transition: transform 0.5s ease;
+        opacity: 0.9;
+    }
+
+    .button:hover::before {
+        transform: translateX(160%) rotate(20deg);
+    }
+
+    .button:hover {
+        background: #ff7a00;
+        border-color: #ff7a00;
+        transform: translateY(-3px);
+        box-shadow: 0 18px 40px rgba(255, 122, 0, 0.6);
+        color: #ffffff;
+    }
+
+    .button img {
+        width: 26px;
+        height: 26px;
+        transition: transform 0.25s ease;
+    }
+
+    .button:hover img {
+        transform: scale(1.1);
+    }
+
+    /* -----------------------------
+       SOCIAL ICONS GLASS CARD
+    ------------------------------ */
+
+    .icons-title {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 12px;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .icons {
+        margin-top: 4px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 26px;
+    }
+
+    .icons a {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 18px;
+        padding: 10px;
+        background: radial-gradient(circle at top, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.02) 55%, transparent 100%);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+
+    .icons a img {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+        transition: transform 0.3s ease, filter 0.3s ease;
+        filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
+    }
+
+    .icons a:hover {
+        transform: translateY(-4px) scale(1.05);
+        background: radial-gradient(circle at top, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.06) 60%, transparent 100%);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .icons a:hover img {
+        transform: scale(1.12);
+        filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.7));
+    }
+
+    /* soft float animation */
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-3px); }
+        100% { transform: translateY(0px); }
+    }
+
+    .icons a:nth-child(odd) img {
+        animation: float 4.2s ease-in-out infinite;
+    }
+    .icons a:nth-child(even) img {
+        animation: float 4.2s ease-in-out infinite;
+        animation-delay: 0.4s;
+    }
+
+    /* -----------------------------
+       FOOTER
+    ------------------------------ */
+
+    .footer {
+        text-align: center;
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.6);
+        margin-top: 6px;
+    }
+
+    .footer span {
+        color: #ffb36a;
+    }
+
+    /* -----------------------------
+       RESPONSIVE
+    ------------------------------ */
+
+    @media (max-width: 600px) {
+        .glass-card {
+            padding: 22px 18px 20px;
+        }
+
+        .logo {
+            width: 130px;
+            height: 130px;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        .button {
+            width: 90%;
+            font-size: 16px;
+            padding: 12px 16px;
+        }
+
+        .icons a img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .icons {
+            gap: 20px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="page-wrapper">
+
+    <!-- MAIN GLASS CARD: LOGO + TITLE + WEBSITE BUTTON -->
+    <div class="glass-card main-card">
+        <img src="logo.jpg" class="logo" alt="ProCounsel Logo">
+
+        <h1>ProCounsel</h1>
+        <div class="subtitle">Trusted Admission Guidance for Students</div>
+
+        <a class="button" href="https://procounsel.co.in" target="_blank">
+            <img src="logo-white.png" alt="ProCounsel Icon">
+            WEBSITE
+        </a>
+    </div>
+
+    <!-- SOCIAL ICONS GLASS CARD -->
+    <div class="glass-card">
+        <div class="icons-title">Connect with Us</div>
+
+        <div class="icons">
+            <!-- Play Store -->
+            <a href="https://play.google.com/store/apps/details?id=com.catalystai.ProCounsel&pli=1" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg" alt="Google Play">
+            </a>
+
+            <!-- App Store -->
+            <a href="https://apps.apple.com/in/app/procounsel/id6752525886" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple App Store">
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/procounsel.co.in" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/company/procounsel-by-catalystai" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
+            </a>
+
+            <!-- YouTube -->
+            <a href="https://youtube.com/@procounsel1561?si=Vox-FjSuJOcaYqPS" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube">
+            </a>
+
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/share/14PKC6pzffD/" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/F_icon.svg" alt="Facebook">
+            </a>
+
+            <!-- X (Twitter) -->
+            <a href="https://x.com/procounsel2025" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023_original.svg" alt="X (Twitter)">
+            </a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        Made with <span>❤️</span> by ProCounsel · All your links in one place
+    </div>
+
+</div>
+
+</body>
+</html>
